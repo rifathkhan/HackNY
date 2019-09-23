@@ -13,9 +13,10 @@ Expirio/client is where all the React files are.
 
 Please include the following values:
 
-ATLAS_URI= MONGO_CONNECTION_STRING
 
-JWT_SECRET= 'SecretKey'
+**ATLAS_URI= MONGO_CONNECTION_STRING**
+
+**JWT_SECRET= 'SecretKey'**
 
 Atlas_URI referres to a mongodb conneection string, please feel free to choose which one you want,
 mine is 'mongodb+srv://user1:12345@cluster0-6adwy.mongodb.net/expire?retryWrites=true&w=majority
