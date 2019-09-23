@@ -1,4 +1,12 @@
 # HackNY
+
+## About the developer environment
+
+Expirio is the location of the developer environment.
+Currently we are using MERN stack.
+server.js is where the app server will start running.
+Expirio/client is where all the React files are.
+
 ## Instructions on how to use the dev environmrnt
 
 ### 1. Create .env file in the Expirio directory
@@ -26,7 +34,7 @@ Remove -g if you want a local install.
 
 Else, just use **node server.js"
 
-### 5. To run react, all react files are in Expirio/client.
+### 5. To run react, go to Expirio/client.
 
 Use **cd client** if you are in Expirio directory in the terminal. If you are in
 the client folder, run **npm start** to have react start running 
