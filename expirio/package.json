@@ -1,7 +1,7 @@
 {
-  "name": "Expirio",
+  "name": "expirio",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web app that informs you if any registered item has expired",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
