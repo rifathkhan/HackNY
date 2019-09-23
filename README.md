@@ -29,4 +29,4 @@ Else, just use **node server.js"
 ### 5. To run react, all react files are in Expirio/client.
 
 Use **cd client** if you are in Expirio directory in the terminal. If you are in
-the client folder, run **npm start** to have react start runnuing 
+the client folder, run **npm start** to have react start running 
