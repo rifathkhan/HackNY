@@ -4,7 +4,6 @@ secretKey = process.env.JWT_SECRET
 function verifyToken(req, res, next) {
 	// get auth header value
     const bearerHeader = req.headers['authorization'];
-    console.log(bearerHeader);
 	// check if bearer undefined
 	if(typeof bearerHeader !== 'undefined'){
 		// split at the space
