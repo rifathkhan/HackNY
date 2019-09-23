@@ -4,7 +4,9 @@ const User = require('../models/user.model');
 const auth = require('../services/authentication')
 
 /*
-Todo: finish the crud for items.
+    Items API
+
+Todo: finish the CRUD for items.
 Please include authentication.
 This api is only for privilaged users (anyone who is logged in)
 */

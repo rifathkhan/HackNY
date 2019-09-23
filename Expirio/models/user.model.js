@@ -23,6 +23,7 @@ const itemSchema = new Schema({
     timestamps: true
 });
 
+// Schema for user
 const userSchema = new Schema({
     username: {
         type: String, 
@@ -50,6 +51,8 @@ const userSchema = new Schema({
 }, {
     timestamps: true
 });
+
+// Creating and exporting user model
 
 const User = mongoose.model('User', userSchema);
 

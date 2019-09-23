@@ -4,8 +4,10 @@ const User = require('../models/user.model');
 const auth = require('../services/authentication')
 
 /*
-Todo: finish the crud for user
-We need to include authentication 
+    User API 
+
+Todo: Finish the API for user.
+We need to include user authentication.
 */
 
 router.route('/signUp').post((req, res) => {
@@ -22,7 +24,7 @@ router.route('/update').post((req, res) => {
 });
 
 router.route('/delete').delete((req, res) => {
-    // Update account
+    // Delete account
 });
 
 module.exports = router;
