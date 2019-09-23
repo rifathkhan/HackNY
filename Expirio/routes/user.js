@@ -11,6 +11,7 @@ Todo: Finish the API for update and delete
 
 router.route('/signup').post((req, res) => {
     // Sign up
+
     newUser = new User({
         username: req.body.username,
         password: req.body.password,
@@ -34,6 +35,7 @@ router.route('/signup').post((req, res) => {
 
 router.route('/login').get((req, res) => {
     // Login
+    
     // For simplicity sake we only assume username and password in res.body
     userInfo = {
         username: req.body.username,
