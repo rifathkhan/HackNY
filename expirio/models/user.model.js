@@ -47,7 +47,7 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-    products: [itemSchema]
+    items: [itemSchema]
 }, {
     timestamps: true
 });

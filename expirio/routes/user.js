@@ -3,23 +3,46 @@ const router = require('express').Router();
 const User = require('../models/user.model');
 const auth = require('../services/authentication')
 
-/*
-    User API 
+//  User API 
 
-Todo: Finish the API for update and delete
+/*
+* Todo:
+* Create Delete and Signout api
 */
 
+//----------------------------------------------------------------------------------------
 // Helper functions
+//----------------------------------------------------------------------------------------
+
 
 function userSecureInfo(userData){
     return {
         username: userData.username,
         email: userData.email,
-        cellnumber: userData.cellnumber
+        cellnumber: userData.cellnumber,
+        items: userData.items
     }
 }
 
+function sendToken(userData){
+    jwt.sign({id: userData._id}, auth.secretKey, (err, token) => {
+        if(err){
+            return res.status(400).json({
+                err, 
+                success: false
+            });
+        } 
+        return res.json({
+            token,
+            userData: userSecureInfo(userData), 
+            success: true
+        });
+    });
+}
+
+//----------------------------------------------------------------------------------------
 // Routes
+//----------------------------------------------------------------------------------------
 
 router.route('/signup').post((req, res) => {
     // Sign up
@@ -29,20 +52,11 @@ router.route('/signup').post((req, res) => {
         password: req.body.password,
         email: req.body.email,
         cellnumber: req.body.cellnumber,
-        products: []
+        items: []
     });
     newUser.save()
     .then(userData => {
-        jwt.sign({user: userData}, auth.secretKey, (err, token) => {
-            if(err){
-                return res.status(400).json({err, success: false});
-            } 
-            res.json({
-                token,
-                userData: userSecureInfo(userData), 
-                success: true
-            });
-        });
+        return sendToken(userData)
     })
     .catch(err => {
         res.status(400).json({err, success: false});
@@ -63,16 +77,7 @@ router.route('/login').get((req, res) => {
         if(!userData){
             return res.status(400).json({message: "Not found!", success: false})
         }
-        jwt.sign({user: userData}, auth.secretKey, (err, token) => {
-            if(err){
-                return res.status(400).json({err});
-            } 
-            return res.json({
-                token, 
-                userData:userSecureInfo(userData),
-                success: true
-            });
-        });
+        return sendToken(userData)
     })
     .catch(err => {
         res.status(403).json({err, success: false});
@@ -87,7 +92,7 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
           return res.sendStatus(400).json({err, success: false});
         } 
         
-        User.findById(authData.user._id)
+        User.findById(authData.id)
         .then(user => {
             user.username = req.body.username;
             user.password = req.body.password;
@@ -98,21 +103,16 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
 
         })
         .then(userData => {
-            jwt.sign({user: userData}, auth.secretKey, (err, token) => {
-                if(err){
-                    return res.status(400).json({err, success: false});
-                } 
-                res.json({
-                    token,
-                    userData: userSecureInfo(userData), 
-                    success: true
-                });
-            });
+            return sendToken(userData)
         })
         .catch(err => {
             res.sendStatus(400).json({err, success: false});
         });
     });
+});
+
+router.route('/signout').get(auth.verifyToken, (req, res) => {
+    // Sign outs account
 });
 
 router.route('/delete').delete(auth.verifyToken, (req, res) => {
