@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-const productSchema = new Schema({
+// -----------------------------------------------------------------------------------
+// Schemas
+// -----------------------------------------------------------------------------------
+
+// Schema for item
+const itemSchema = new Schema({
     name: {
         type: String, 
         required: true
@@ -41,7 +46,7 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-    products: [productSchema]
+    products: [itemSchema]
 }, {
     timestamps: true
 });

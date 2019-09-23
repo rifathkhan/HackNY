@@ -4,7 +4,7 @@ const User = require('../models/user.model');
 const auth = require('../services/authentication')
 
 /*
-Todo: finish the crud for users
+Todo: finish the crud for user
 We need to include authentication 
 */
 

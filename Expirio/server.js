@@ -33,14 +33,14 @@ connection.once('open', () => {
 // Import routers
 //---------------------------------------------------------------------------------------
 
-const productsRouter = require('./routes/products');
+const itemsRouter = require('./routes/items');
 const userRouter = require('./routes/user')
 
 //---------------------------------------------------------------------------------------
 // Use routers
 //---------------------------------------------------------------------------------------
 
-app.use('/products', productsRouter);
+app.use('/items', itemsRouter);
 app.use('/user', userRouter);
 
 
