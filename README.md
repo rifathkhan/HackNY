@@ -19,7 +19,7 @@ Please include the following values:
 **JWT_SECRET= 'SecretKey'**
 
 Atlas_URI referres to a mongodb conneection string, please feel free to choose which one you want,
-mine is 'mongodb+srv://user1:12345@cluster0-6adwy.mongodb.net/expire?retryWrites=true&w=majority
+mine is **mongodb+srv://user1:12345@cluster0-6adwy.mongodb.net/expire?retryWrites=true&w=majority**
 
 JWT_SECRET can be any string value you choose, it is a secret key for user authentication
 
