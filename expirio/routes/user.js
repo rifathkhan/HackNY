@@ -25,7 +25,7 @@ function userSecureInfo(userData){
 }
 
 function sendToken(userData){
-    jwt.sign({id: userData._id}, auth.secretKey, (err, token) => {
+    return jwt.sign({id: userData._id}, auth.secretKey, (err, token) => {
         if(err){
             return res.status(400).json({
                 err, 
@@ -103,7 +103,7 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
 
         })
         .then(userData => {
-            return sendToken(userData)
+            req.json({userData: userSecureInfo(userData), success: true})
         })
         .catch(err => {
             res.sendStatus(400).json({err, success: false});
@@ -113,6 +113,8 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
 
 router.route('/signout').get(auth.verifyToken, (req, res) => {
     // Sign outs account
+
+    res.send()
 });
 
 router.route('/delete').delete(auth.verifyToken, (req, res) => {
