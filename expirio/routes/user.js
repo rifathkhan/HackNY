@@ -111,12 +111,6 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
     });
 });
 
-router.route('/signout').get(auth.verifyToken, (req, res) => {
-    // Sign outs account
-
-    res.send()
-});
-
 router.route('/delete').delete(auth.verifyToken, (req, res) => {
     // Delete account
 });
