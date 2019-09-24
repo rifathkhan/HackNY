@@ -7,7 +7,7 @@ const auth = require('../services/authentication')
 
 /*
 * Todo:
-* Create Delete and Signout api
+* Create Delete api.
 */
 
 //----------------------------------------------------------------------------------------
@@ -25,12 +25,9 @@ function userSecureInfo(userData){
 }
 
 function sendToken(userData){
-    return jwt.sign({id: userData._id}, auth.secretKey, (err, token) => {
+    return jwt.sign({id: userData._id}, auth.secretKey, {expiresIn: '1d'}, (err, token) => {
         if(err){
-            return res.status(400).json({
-                err, 
-                success: false
-            });
+            return res.status(401).json({err, success: false});
         } 
         return res.json({
             token,
@@ -59,7 +56,7 @@ router.route('/signup').post((req, res) => {
         return sendToken(userData)
     })
     .catch(err => {
-        res.status(400).json({err, success: false});
+        res.status(401).json({err, success: false});
     });
 });
 
@@ -75,7 +72,7 @@ router.route('/login').get((req, res) => {
     User.findOne(userInfo)
     .then(userData => {
         if(!userData){
-            return res.status(400).json({message: "Not found!", success: false})
+            return res.status(401).json({message: "Not found!", success: false})
         }
         return sendToken(userData)
     })
@@ -89,7 +86,7 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
         if(err) {
-          return res.sendStatus(400).json({err, success: false});
+          return res.sendStatus(401).json({err, success: false});
         } 
         
         User.findById(authData.id)
@@ -106,7 +103,7 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
             req.json({userData: userSecureInfo(userData), success: true})
         })
         .catch(err => {
-            res.sendStatus(400).json({err, success: false});
+            res.sendStatus(401).json({err, success: false});
         });
     });
 });
