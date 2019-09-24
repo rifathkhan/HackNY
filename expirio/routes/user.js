@@ -24,16 +24,12 @@ function userSecureInfo(userData){
     }
 }
 
-function sendToken(userData){
-    return jwt.sign({id: userData._id}, auth.secretKey, {expiresIn: '1d'}, (err, token) => {
+function sendTokenInfo(res, userData){
+    jwt.sign({id: userData._id}, auth.secretKey, {expiresIn: '1d'}, (err, token) => {
         if(err){
-            return res.status(401).json({err, success: false});
+            res.status(401).json({error: err.toString(), success: false});
         } 
-        return res.json({
-            token,
-            userData: userSecureInfo(userData), 
-            success: true
-        });
+        res.json({token,userInfo: userSecureInfo(userData), success: true});
     });
 }
 
@@ -41,8 +37,9 @@ function sendToken(userData){
 // Routes
 //----------------------------------------------------------------------------------------
 
+// @route POST /signup
+// @desc Signs up user to db and sends token
 router.route('/signup').post((req, res) => {
-    // Sign up
 
     newUser = new User({
         username: req.body.username,
@@ -53,63 +50,102 @@ router.route('/signup').post((req, res) => {
     });
     newUser.save()
     .then(userData => {
-        return sendToken(userData)
+        sendTokenInfo(res, userData);
     })
     .catch(err => {
-        res.status(401).json({err, success: false});
+        res.status(401).json({error: err.toString(), success: false});
     });
 });
 
+// @route GET /login
+// @desc Logs in user and sends token
 router.route('/login').get((req, res) => {
-    // Login
     
     // For simplicity sake we only assume username and password in res.body
     userInfo = {
         username: req.body.username,
         password: req.body.password
     };
-    //make querie if mongodb user has username and password match
     User.findOne(userInfo)
     .then(userData => {
         if(!userData){
-            return res.status(401).json({message: "Not found!", success: false})
+            return res.status(401).json({message: "Not found!", success: false});
         }
-        return sendToken(userData)
+        sendTokenInfo(res, userData);
     })
     .catch(err => {
-        res.status(403).json({err, success: false});
+        res.status(403).json({error: err.toString(), success: false});
     });
 });
 
+// @route POST /login
+// @desc Update user info (except password)
 router.route('/update').post(auth.verifyToken, (req, res) => {
-    // Update account
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
         if(err) {
-          return res.sendStatus(401).json({err, success: false});
+          return res.status(401).json({error: err.toString(), success: false});
         } 
-        
         User.findById(authData.id)
         .then(user => {
             user.username = req.body.username;
-            user.password = req.body.password;
             user.email = req.body.email;
             user.cellnumber = req.body.cellnumber;
 
-            return user.save()
+            return user.save();
 
         })
         .then(userData => {
-            req.json({userData: userSecureInfo(userData), success: true})
+            res.json({userInfo: userSecureInfo(userData), success: true});
         })
         .catch(err => {
-            res.sendStatus(401).json({err, success: false});
+            res.status(401).json({error: err.toString(), success: false});
         });
     });
 });
 
+// @route POST /login
+// @desc Updates user password
+router.route('/update/password').post(auth.verifyToken, (req, res) => {
+
+    jwt.verify(req.token, auth.secretKey, (err, authData) => {
+        if(err) {
+          return res.status(401).json({error: err.toString(), success: false});
+        } 
+        User.findById(authData.id)
+        .then(user => {
+            if(user.password !== req.body.oldPassword){
+                throw new Error('old password invalid');
+            }
+            user.password = req.body.newPassword;
+            return user.save();
+        })
+        .then(userData => {
+            res.json({userInfo: userSecureInfo(userData), success: true});
+        })
+        .catch(err => {
+            res.status(401).json({error: err.toString(), success: false});
+        });
+    });
+});
+
+// @route DELETE /login
+// @desc Deletes current user (will not affect token on client side but will become invalid). 
+//       The client server still is responsible for removing the token
 router.route('/delete').delete(auth.verifyToken, (req, res) => {
-    // Delete account
+
+    jwt.verify(req.token, auth.secretKey, (err, authData) => {
+        if(err) {
+            return res.status(401).json({error: err.toString(), success: false});
+        } 
+        User.findByIdAndRemove(authData.id, (err, doc) => {
+            if(err){
+                return res.status(403).json({error: err.toString(), success: false});
+            }
+            console.log(doc);
+            res.json({message: "successfuly removed", success: true});
+        });
+    });
 });
 
 module.exports = router;
