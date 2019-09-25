@@ -28,6 +28,9 @@ function itemsRespond(res, user){
 router.route('/').get(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
+        if(err) {
+            return res.status(401).json({error: err.toString(), success: false});
+        } 
         User.findById(authData.id)
         .then(user => {
             itemsRespond(res, user)
@@ -43,6 +46,9 @@ router.route('/').get(auth.verifyToken, (req, res) => {
 router.route('/create').post(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
+        if(err) {
+            return res.status(401).json({error: err.toString(), success: false});
+        } 
         User.findById(authData.id)
         .then(user => {
             user.items.push(
@@ -70,6 +76,9 @@ router.route('/create').post(auth.verifyToken, (req, res) => {
 router.route('/update').post(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
+        if(err) {
+            return res.status(401).json({error: err.toString(), success: false});
+        } 
         User.findById(authData.id)
         .then(user => {
             user.items = user.items.map(elem => {
@@ -98,6 +107,9 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
 router.route('/delete').delete(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
+        if(err) {
+            return res.status(401).json({error: err.toString(), success: false});
+        } 
         User.findById(authData.id)
         .then(user => {
             user.items = user.items.filter(item => req.body.id != item._id);
