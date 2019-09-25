@@ -23,7 +23,10 @@ function itemsRespond(res, user){
 // Routes
 //--------------------------------------------------------------------------
 
-// @route GET /
+// @route GET items
+// @headers {
+//     Authorization: { Type: String, Value: "bearer " + <Token string> }
+// }
 // @desc Show all items of a user 
 router.route('/').get(auth.verifyToken, (req, res) => {
 
@@ -41,7 +44,15 @@ router.route('/').get(auth.verifyToken, (req, res) => {
     });
 });
 
-// @route POST create/
+// @route POST items/create
+// @headers {
+//     Authorization: { Type: String, Value: "bearer " + <Token string> }
+// }
+// @body {
+//     name: {Type: String},
+//     type: {Type: String},
+//     expireDate: {Type: Date}
+// }
 // @desc Create new item for a user
 router.route('/create').post(auth.verifyToken, (req, res) => {
 
@@ -71,9 +82,18 @@ router.route('/create').post(auth.verifyToken, (req, res) => {
     });
 });
 
-// @route GET /
+// @route PATCH items/update/:id
+// @headers {
+//     Authorization: { Type: String, Value: "bearer " + <Token string> }
+// }
+// @params { id: {Type: String} }
+// @body {
+//     name: {Type: String},
+//     type: {Type: String},
+//     expireDate: {Type: Date}
+// }
 // @desc Update item for a user
-router.route('/update').post(auth.verifyToken, (req, res) => {
+router.route('/update/:id').patch(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
         if(err) {
@@ -82,7 +102,7 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
         User.findById(authData.id)
         .then(user => {
             user.items = user.items.map(elem => {
-                if(req.body.id == elem._id){
+                if(req.params.id == elem._id){
                     elem.name = req.body.name;
                     elem.type = req.body.type;
                     elem.expireDate = req.body.expireDate;
@@ -102,9 +122,12 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
     });
 });
 
-// @route GET /
+// @route DELETE items/delete/:id
+// @headers {
+//     Authorization: {Type: String, Value: "bearer " + <Token string>}
+// }Post
 // @desc Delete item
-router.route('/delete').delete(auth.verifyToken, (req, res) => {
+router.route('/delete/:id').delete(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
         if(err) {
@@ -112,7 +135,7 @@ router.route('/delete').delete(auth.verifyToken, (req, res) => {
         } 
         User.findById(authData.id)
         .then(user => {
-            user.items = user.items.filter(item => req.body.id != item._id);
+            user.items = user.items.filter(item => req.params.id != item._id);
             user.save();
             return user;
         })

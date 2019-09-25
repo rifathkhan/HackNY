@@ -51,12 +51,12 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        required: false,
+        required: true,
         trim: true
     },
     cellnumber: {
         type: String,
-        required: false
+        required: true
     },
     items: [itemSchema]
 }, {

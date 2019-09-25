@@ -41,7 +41,13 @@ function sendTokenInfo(res, userData){
 // Routes
 //----------------------------------------------------------------------------------------
 
-// @route POST /signup
+// @route POST user/signup
+// @body {
+//     username: {Type: String},
+//     password: {Type: String},
+//     email: {Type: String},
+//     cellnumber: {Type: String}
+// }
 // @desc Signs up user to db and sends token
 router.route('/signup').post((req, res) => {
 
@@ -61,7 +67,11 @@ router.route('/signup').post((req, res) => {
     });
 });
 
-// @route GET /login
+// @route GET user/login
+// @body {
+//     username: {Type: String},
+//     password: {Type: String},
+// }
 // @desc Logs in user and sends token
 router.route('/login').get((req, res) => {
     
@@ -82,7 +92,15 @@ router.route('/login').get((req, res) => {
     });
 });
 
-// @route POST /login
+// @route POST user/update
+// @headers {
+//     Authorization: { Type: String, Value: "bearer " + <Token string> }
+// }
+// @body {
+//     username: {Type: String},
+//     email: {Type: String},
+//     cellnumber: {Type: String}
+// }
 // @desc Update user info (except password)
 router.route('/update').post(auth.verifyToken, (req, res) => {
 
@@ -108,7 +126,14 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
     });
 });
 
-// @route POST /login
+// @route POST user/update/password
+// @headers {
+//     Authorization: { Type: String, Value: "bearer " + <Token string> }
+// }
+// @body {
+//     oldPassword: {Type: String},
+//     newPassword: {Type: String},
+// }
 // @desc Updates user password
 router.route('/update/password').post(auth.verifyToken, (req, res) => {
 
@@ -133,7 +158,10 @@ router.route('/update/password').post(auth.verifyToken, (req, res) => {
     });
 });
 
-// @route DELETE /login
+// @route DELETE user/delete
+// @headers {
+//     Authorization: { Type: String, Value: "bearer " + <Token string> }
+// }
 // @desc Deletes current user (will not affect token on client side but will become invalid). 
 //       The client server still is responsible for removing the token
 router.route('/delete').delete(auth.verifyToken, (req, res) => {
