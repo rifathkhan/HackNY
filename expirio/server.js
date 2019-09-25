@@ -24,6 +24,7 @@ mongoose.connect(uri, {
     useUnifiedTopology: true,
     useCreateIndex: true
 });
+mongoose.set('useFindAndModify', false);
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('Mongodb installed succesfully')

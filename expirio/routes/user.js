@@ -1,13 +1,18 @@
 const jwt  = require('jsonwebtoken');
 const router = require('express').Router();
-const User = require('../models/user.model');
+const User = require('../models/user.models').User;
 const auth = require('../services/authentication')
 
 //  User API 
 
 /*
-* Todo:
-* Create Delete api.
+
+TODO:
+
+Fix delete API to require password
+
+If password encryption is added, reconfigure the APIs if password is needed
+
 */
 
 //----------------------------------------------------------------------------------------
@@ -19,8 +24,7 @@ function userSecureInfo(userData){
     return {
         username: userData.username,
         email: userData.email,
-        cellnumber: userData.cellnumber,
-        items: userData.items
+        cellnumber: userData.cellnumber
     }
 }
 
@@ -29,7 +33,7 @@ function sendTokenInfo(res, userData){
         if(err){
             res.status(401).json({error: err.toString(), success: false});
         } 
-        res.json({token,userInfo: userSecureInfo(userData), success: true});
+        res.json({token, userInfo: userSecureInfo(userData), success: true});
     });
 }
 

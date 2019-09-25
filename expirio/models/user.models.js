@@ -1,12 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
+/*
+
+TODO:
+
+Include password encryption for user
+
+*/
+
 // -----------------------------------------------------------------------------------
 // Schemas
 // -----------------------------------------------------------------------------------
 
 // Schema for item
 const itemSchema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId
+    },
     name: {
         type: String, 
         required: true
@@ -54,6 +65,9 @@ const userSchema = new Schema({
 
 // Creating and exporting user model
 
-const User = mongoose.model('User', userSchema);
 
-module.exports = User
+const User = mongoose.model('User', userSchema);
+const Item = mongoose.model('Item', itemSchema);
+
+
+module.exports = {User, Item}
