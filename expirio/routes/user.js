@@ -92,7 +92,7 @@ router.route('/login').get((req, res) => {
     });
 });
 
-// @route POST user/update
+// @route PATCH user/update
 // @headers {
 //     Authorization: { Type: String, Value: "bearer " + <Token string> }
 // }
@@ -102,7 +102,7 @@ router.route('/login').get((req, res) => {
 //     cellnumber: {Type: String}
 // }
 // @desc Update user info (except password)
-router.route('/update').post(auth.verifyToken, (req, res) => {
+router.route('/update').patch(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
         if(err) {
@@ -126,7 +126,7 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
     });
 });
 
-// @route POST user/update/password
+// @route PATCH user/update/password
 // @headers {
 //     Authorization: { Type: String, Value: "bearer " + <Token string> }
 // }
@@ -135,7 +135,7 @@ router.route('/update').post(auth.verifyToken, (req, res) => {
 //     newPassword: {Type: String},
 // }
 // @desc Updates user password
-router.route('/update/password').post(auth.verifyToken, (req, res) => {
+router.route('/update/password').patch(auth.verifyToken, (req, res) => {
 
     jwt.verify(req.token, auth.secretKey, (err, authData) => {
         if(err) {
