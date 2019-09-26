@@ -127,7 +127,6 @@ router.route('/update/:id').patch(auth.verifyToken, (req, res) => {
                     elem.name = req.body.name;
                     elem.type = req.body.type;
                     elem.expireDate = req.body.expireDate;
-                    return elem;
                 }
                 return elem;
             });
