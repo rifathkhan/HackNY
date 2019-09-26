@@ -27,14 +27,7 @@ JWT_SECRET can be any string value you choose, it is a secret key for user authe
 
 Both have package.json in them.
 
-### 3. Please install nodemon globally (or locally for the project in Expirio)
-
-The command for it is **npm install -g nodemon**. 
-Remove -g if you want a local install.
-
-### 4. If nodemon is installed, run the backend server in Expirio  with **nodemon server**
-
-Else, just use **node server.js"
+### 3. If you are developing the server, run **npm run dev**
 
 ### 5. To run react, go to Expirio/client.
 
