@@ -12,11 +12,11 @@ const splitExpr = require('../services/itemservices').splitExpr
 //--------------------------------------------------------------------------
 
 // @desc Responds to client with items array and a split up version
-function itemsRespond(res, user){
+function splitItemsRespond(res, user){
     splitItemsArrs = splitExpr(user.items);
     exprItems = splitItemsArrs[0];
     goodItems = splitItemsArrs[1];
-    return res.json({goodItems, exprItems, allItems: user.items, success: true});
+    return res.json({goodItems, exprItems, success: true});
 }
 
 //--------------------------------------------------------------------------
@@ -27,6 +27,11 @@ function itemsRespond(res, user){
 // @headers {
 //     Authorization: { Type: String, Value: "bearer " + <Token string> }
 // }
+// @query { split: {Type: String} } 
+//      
+//      if split = "true", then two arrays split by expired and not expired is 
+//      is given in the response.
+// 
 // @desc Show all items of a user 
 router.route('/').get(auth.verifyToken, (req, res) => {
 
@@ -36,7 +41,10 @@ router.route('/').get(auth.verifyToken, (req, res) => {
         } 
         User.findById(authData.id)
         .then(user => {
-            itemsRespond(res, user)
+            if (req.query.split == 'true'){
+                return splitItemsRespond(res, user);
+            }
+            res.json({items: user.items, success: true});
         })
         .catch(err => {
             res.status(404).json({error: err.toString(), success: false});
@@ -48,6 +56,11 @@ router.route('/').get(auth.verifyToken, (req, res) => {
 // @headers {
 //     Authorization: { Type: String, Value: "bearer " + <Token string> }
 // }
+// @query { split: {Type: String} } 
+//      
+//      if split = "true", then two arrays split by expired and not expired is 
+//      is given in the response.
+// 
 // @body {
 //     name: {Type: String},
 //     type: {Type: String},
@@ -73,7 +86,10 @@ router.route('/create').post(auth.verifyToken, (req, res) => {
             return user.save();
         })
         .then(user => {
-            itemsRespond(res, user)
+            if (req.query.split == 'true'){
+                return splitItemsRespond(res, user);
+            }
+            res.json({items: user.items, success: true});
         })
         .catch(err => {
             res.status(400).json({error: err.toString(), success: false});
@@ -87,6 +103,11 @@ router.route('/create').post(auth.verifyToken, (req, res) => {
 //     Authorization: { Type: String, Value: "bearer " + <Token string> }
 // }
 // @params { id: {Type: String} }
+// @query { split: {Type: String} } 
+//      
+//      if split = "true", then two arrays split by expired and not expired is 
+//      is given in the response.
+// 
 // @body {
 //     name: {Type: String},
 //     type: {Type: String},
@@ -113,7 +134,10 @@ router.route('/update/:id').patch(auth.verifyToken, (req, res) => {
             return user.save()
         })
         .then(user => {
-            itemsRespond(res, user)
+            if (req.query.split == 'true'){
+                return splitItemsRespond(res, user);
+            }
+            res.json({items: user.items, success: true});
         })
         .catch(err => {
             res.status(401).json({error: err.toString(), success: false});
@@ -125,7 +149,12 @@ router.route('/update/:id').patch(auth.verifyToken, (req, res) => {
 // @route DELETE items/delete/:id
 // @headers {
 //     Authorization: {Type: String, Value: "bearer " + <Token string>}
-// }Post
+// }
+// @query { split: {Type: String} } 
+//      
+//      if split = "true", then two arrays split by expired and not expired is 
+//      is given in the response.
+// 
 // @desc Delete item
 router.route('/delete/:id').delete(auth.verifyToken, (req, res) => {
 
@@ -140,7 +169,10 @@ router.route('/delete/:id').delete(auth.verifyToken, (req, res) => {
             return user;
         })
         .then(user => {
-            itemsRespond(res, user)
+            if (req.query.split == 'true'){
+                return splitItemsRespond(res, user);
+            }
+            res.json({items: user.items, success: true});
         })
         .catch(err => {
             res.status(401).json({error: err.toString(), success: false});
