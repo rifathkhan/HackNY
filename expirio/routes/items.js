@@ -140,7 +140,7 @@ router.route('/update/:id').patch(auth.verifyToken, (req, res) => {
             res.json({items: user.items, success: true});
         })
         .catch(err => {
-            res.status(401).json({error: err.toString(), success: false});
+            res.status(400).json({error: err.toString(), success: false});
         });
         
     });
@@ -175,7 +175,7 @@ router.route('/delete/:id').delete(auth.verifyToken, (req, res) => {
             res.json({items: user.items, success: true});
         })
         .catch(err => {
-            res.status(401).json({error: err.toString(), success: false});
+            res.status(400).json({error: err.toString(), success: false});
         });
         
     });
