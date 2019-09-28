@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+import "../signup.css"
+
 export default class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -51,29 +54,29 @@ export default class CreateUser extends Component {
                     <div className="col-md-9 col-lg-8 mx-auto">
                       <h3 className="login-heading mb-4">Create an account!</h3>
                       <form>
+                        <label htmlFor="inputName" className="text-center" >User Name</label>
                         <div className="form-label-group">
-                          <label for="inputEmail">User Name</label>
-                          <input name="username" type="email" id="inputUsername" className="form-control" placeholder="Todd Howard" required autofocus/>
+                          <input name="username" type="username" id="inputUsername" className="form-control" required autoFocus/>
                         </div>
 
+                        <label htmlFor="inputEmail">Email address</label>
                         <div className="form-label-group">
-                          <label for="inputEmail">Email address</label>
-                          <input name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" required autofocus/>
+                          <input name="email" type="email" id="inputEmail" className="form-control" required autoFocus/>
                         </div>
 
+                        <label htmlFor="inputPassword">Password</label>
                         <div className="form-label-group">
-                          <label for="inputPassword">Password</label>
-                          <input name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" required/> 
+                          <input name="password" type="password" id="inputPassword" className="form-control" required/> 
                         </div>
 
+                        <label htmlFor="inputPassword">Confirm Password</label>
                         <div className="form-label-group"> 
-                          <label for="inputPassword">Confirm Password</label>
-                          <input type="password" id="inputPassword" className="form-control" placeholder="Password" required/> 
+                          <input type="password" id="inputPassword" className="form-control" required/> 
                         </div>
 
+                        <label htmlFor="inputPhoneNumber">Phone number</label>
                         <div className="form-label-group">
-                          <label for="inputPhoneNumber">Phone number</label>
-                          <input name="cellnumber" type="password" id="inputPassword" className="form-control" placeholder="Password" required/> 
+                          <input name="cellnumber" type="password" id="inputPassword" className="form-control" required/> 
                         </div>
 
                         <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Register</button>

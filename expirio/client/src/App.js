@@ -2,11 +2,10 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import Navbar from "./components/navbar.component";
 import MedicationList from "./components/medication-list.component";
 import EditMedication from "./components/edit-medication.component";
 import AddMedication from "./components/add-medication.component";
-import CreateNewUser from "./components/create-user.component";
+import CreateNewUser from "./components/user-signup.component";
 import UserLogin from "./components/user-login.component";
 
 function App() {

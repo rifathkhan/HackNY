@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import "../login.css"
+
 export default class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -50,18 +52,18 @@ export default class CreateUser extends Component {
                       <div className="col-md-9 col-lg-8 mx-auto">
                         <h3 className="login-heading mb-4">Welcome back!</h3>
                         <form>
+                          <label htmlFor="inputEmail">Email address</label>
                           <div className="form-label-group">
-                            <label for="inputEmail">Email address</label>
-                            <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required autofocus/>
+                            <input type="email" id="inputEmail" className="form-control" required autoFocus/>
                           </div>
+                          <label htmlFor="inputPassword">Password</label>
                           <div className="form-label-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required/> 
+                            <input type="password" id="inputPassword" className="form-control" required/> 
                           </div>
 
                           <div className="custom-control custom-checkbox mb-3">
                             <input type="checkbox" className="custom-control-input" id="customCheck1"/>
-                            <label className="custom-control-label" for="customCheck1">Remember password</label>
+                            <label className="custom-control-label" htmlFor="customCheck1">Remember password</label>
                           </div>
                           
                           <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>

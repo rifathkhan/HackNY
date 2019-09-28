@@ -29,6 +29,10 @@
     position: relative;
     margin-bottom: 1rem;
   }
+
+  .label-login-page {
+    text-align: center;
+  }
   
   .form-label-group>input,
   .form-label-group>label {
