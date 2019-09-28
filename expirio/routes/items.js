@@ -80,7 +80,9 @@ router.route('/create').post(auth.verifyToken, (req, res) => {
                     "_id": mongoose.Types.ObjectId(),
                     "name": req.body.name,
                     "type": req.body.type,
-                    "expireDate": req.body.expireDate
+                    "expireDate": req.body.expireDate,
+                    "description": req.body.description,
+                    "duration": req.body.duration
                 })
             );
             return user.save();
@@ -127,6 +129,8 @@ router.route('/update/:id').patch(auth.verifyToken, (req, res) => {
                     elem.name = req.body.name;
                     elem.type = req.body.type;
                     elem.expireDate = req.body.expireDate;
+                    elem.description = req.body.description;
+                    elem.duration = req.body.duration;
                 }
                 return elem;
             });

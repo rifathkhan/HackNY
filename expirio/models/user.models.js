@@ -26,6 +26,12 @@ const itemSchema = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String
+    },
+    duration: {
+        type: String
+    },
     expireDate: {
         type: Date,
         equired: true
