@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// import Navbar from "./components/navbar.component";
+import MedicationList from "./components/medication-list.component";
+import EditMedication from "./components/edit-medication.component";
+import AddMedication from "./components/add-medication.component";
+import CreateNewUser from "./components/create-user.component";
+import UserLogin from "./components/user-login.component";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router> 
+        <div className="container">
+         <br/>
+
+          <Route path="/medcab" exact component={MedicationList} />
+          <Route path="/edit/:id" exact component={EditMedication} />
+          <Route path="/add" exact component={AddMedication} />
+          <Route path="/signup" exact component={CreateNewUser} />
+          <Route path="/login" exact component={UserLogin} />
+        
+        </div>
+    </Router>
   );
 }
 
