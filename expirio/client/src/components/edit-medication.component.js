@@ -23,7 +23,7 @@ export default class EditMedication extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/'+this.props.match.params.id)
+    axios.get('http://localhost:5000/medication/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           username: response.data.username,

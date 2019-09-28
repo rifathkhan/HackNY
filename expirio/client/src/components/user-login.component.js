@@ -70,7 +70,7 @@ export default class CreateUser extends Component {
                           </div>
 
                           <div className="text-center">
-                            <a className="small" href="/user">Don't have an account?</a>
+                            <a className="small" href="/signup">Don't have an account?</a>
                           </div>
                             
                         </form>
