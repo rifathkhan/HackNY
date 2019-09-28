@@ -1,44 +1,26 @@
 import React from 'react';
-import './App.css';
-
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import Navbar from "./components/navbar.component";
+import MedicationList from "./components/medication-list.component";
+import EditMedication from "./components/edit-medication.component";
+import AddMedication from "./components/add-medication.component";
+import CreateNewUser from "./components/create-user.component";
 
 
 function App() {
   return (
-
-    <div>
-      <body>
-        <section className = "container-fliud bg">  
-          <section className = "row justify-content-center">
-            <section className = "col-12 col-sm-6 col-md-3 ">
-              <form className="form-container">
-                      
-                <div className="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-                  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                      
-                <div className="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"></input>
-                </div>
-                      
-                <div className="form-group form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
-                        <label className="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                      
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
-
-              </form>        
-            </section>
-          </section>	
-        </section>
-      </body>
-    </div>
-
+    <Router> 
+      <div className="container">
+        <Navbar />
+        <br/>
+        <Route path="/" exact component={MedicationList} />
+        <Route path="/edit/:id" exact component={EditMedication} />
+        <Route path="/create" exact component={AddMedication} />
+        <Route path="/user" exact component={CreateNewUser} />
+      </div>
+    </Router>
   );
 }
 
