@@ -58,6 +58,13 @@ router.route('/signup').post((req, res) => {
         cellnumber: req.body.cellnumber,
         items: []
     });
+
+    const reg = new RegExp('^\\d+$');
+
+    if(!reg.test(req.body.cellnumber)){
+        return res.status(400).json({error: "numbers only allowed!", success: false});
+    }
+
     newUser.save()
     .then(userData => {
         sendTokenInfo(res, userData);

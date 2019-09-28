@@ -61,8 +61,8 @@ const server = app.listen(port, () => {
 server.on('listening', () => {
     setInterval(() => {
         if(mongoose.connection.readyState === 1){
-            textForAll();
+            //textForAll();
         }          
     }, 
-    1000);
+    60000);
  })
