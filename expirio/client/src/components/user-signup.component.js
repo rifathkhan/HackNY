@@ -43,8 +43,7 @@ export default class CreateUser extends Component {
 
   render() {
     return (
-      <div>
-        <div className="container-fluid">
+      <div className="container-fluid">
           <div className="row no-gutter">
             <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
               <div className="col-md-8 col-lg-6">
@@ -90,7 +89,6 @@ export default class CreateUser extends Component {
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }
