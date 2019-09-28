@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors')
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const textForAll = require('./services/text').textForAll
+const { textForAll } = require('./services/text');
+
 
 require('dotenv').config();
 
@@ -60,8 +61,8 @@ const server = app.listen(port, () => {
 server.on('listening', () => {
     setInterval(() => {
         if(mongoose.connection.readyState === 1){
-            textForAll();
+            //textForAll();
         }          
     }, 
-    1000);
+    60000);
  })
