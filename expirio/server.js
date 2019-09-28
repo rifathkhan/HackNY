@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors')
 const mongoose = require('mongoose');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const textForAll = require('./services/text').textForAll
 
 require('dotenv').config();
 
@@ -27,7 +28,7 @@ mongoose.connect(uri, {
 mongoose.set('useFindAndModify', false);
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log('Mongodb installed succesfully')
+    console.log('Mongodb installed succesfully');
 });
 
 //---------------------------------------------------------------------------------------
@@ -48,11 +49,19 @@ app.use('/user', userRouter);
 //---------------------------------------------------------------------------------------
 // Create Server Using port
 //---------------------------------------------------------------------------------------
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 });
 
 //---------------------------------------------------------------------------------------
-// Text messaging and email APIs
+// Background processes
 //---------------------------------------------------------------------------------------
 
+server.on('listening', () => {
+    setInterval(() => {
+        if(mongoose.connection.readyState === 1){
+            textForAll();
+        }          
+    }, 
+    1000);
+ })
