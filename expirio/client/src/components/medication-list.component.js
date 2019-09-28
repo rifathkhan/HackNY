@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from './navbar.component';
 
 const Medication = props => (
   <tr>
@@ -9,48 +10,49 @@ const Medication = props => (
     <td>{props.medication.duration}</td>
     <td>{props.medication.date.substring(0,10)}</td>
     <td>
-      <Link to={"/edit/"+props.medication._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.medication._id) }}>delete</a>
+      <Link to={"/edit/"+props.medication._id}>edit</Link> | <a href="#" onClick={() => { props.deleteMedication(props.medication._id) }}>delete</a>
     </td>
   </tr>
 )
 
-export default class ExercisesList extends Component {
+export default class MedicationList extends Component {
   constructor(props) {
     super(props);
 
-    this.deleteExercise = this.deleteExercise.bind(this)
+    this.deleteMedication = this.deleteMedication.bind(this)
 
-    this.state = {exercises: []};
+    this.state = {medication: []};
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/')
+    axios.get('http://localhost:5000/items/')
       .then(response => {
-        this.setState({ exercises: response.data })
+        this.setState({ medication: response.data })
       })
       .catch((error) => {
         console.log(error);
       })
   }
 
-  deleteExercise(id) {
-    axios.delete('http://localhost:5000/exercises/'+id)
+  deleteMedication(id) {
+    axios.delete('http://localhost:5000/items/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
-      exercises: this.state.exercises.filter(el => el._id !== id)
+      medication: this.state.medication.filter(el => el._id !== id)
     })
   }
 
   exerciseList() {
-    return this.state.exercises.map(currentexercise => {
-      return <Medication exercise={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise._id}/>;
+    return this.state.medication.map(currentmedication => {
+      return <Medication medication={currentmedication} deleteMedication={this.deleteMedication} key={currentmedication._id}/>;
     })
   }
 
   render() {
     return (
       <div>
+        <Navbar></Navbar>
         <h3>Medication Cabinet: </h3>
         <table className="table">
           <thead className="thead-light">
@@ -58,7 +60,7 @@ export default class ExercisesList extends Component {
               <th>Username</th>
               <th>Description</th>
               <th>Duration</th>
-              <th>Date</th>
+              <th>Expiration Date</th>
               <th>Actions</th>
             </tr>
           </thead>

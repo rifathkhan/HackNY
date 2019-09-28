@@ -7,16 +7,16 @@ export default class CreateMedication extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeMedication = this.onChangeMedication.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: '',
+      medication: '',
       description: '',
-      duration: 0,
+      duration: '',
       date: new Date(),
       users: []
     }
@@ -27,8 +27,8 @@ export default class CreateMedication extends Component {
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            users: response.data.map(user => user.username),
-            username: response.data[0].username
+            users: response.data.map(user => user.medication),
+            medication: response.data[0].medication
           })
         }
       })
@@ -38,9 +38,9 @@ export default class CreateMedication extends Component {
 
   }
 
-  onChangeUsername(e) {
+  onChangeMedication(e) {
     this.setState({
-      username: e.target.value
+      medication: e.target.value
     })
   }
 
@@ -66,7 +66,7 @@ export default class CreateMedication extends Component {
     e.preventDefault();
 
     const medication = {
-      username: this.state.username,
+      medication: this.state.medication,
       description: this.state.description,
       duration: this.state.duration,
       date: this.state.date
@@ -77,7 +77,7 @@ export default class CreateMedication extends Component {
     axios.post('http://localhost:5000/exercises/add', medication)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+    window.location = '/medcab';
   }
 
   render() {
@@ -86,24 +86,16 @@ export default class CreateMedication extends Component {
       <h3>Add new medication</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
-          <label>Username: </label>
-          <select ref="userInput"
-              required
-              className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option 
-                    key={user}
-                    value={user}>{user}
-                    </option>;
-                })
-              }
-          </select>
+          <label>Medication Name:</label>
+          <input type="text"
+            required
+            className="form-control"
+            value={this.state.medication}
+            onChange={this.onChangeMedication}
+            />
         </div>
         <div className="form-group"> 
-          <label>Description: </label>
+          <label>Description - (What is this medication for?): </label>
           <input  type="text"
               required
               className="form-control"
@@ -112,7 +104,7 @@ export default class CreateMedication extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Duration (in minutes): </label>
+          <label>Duration - (How frequenntly do you take this medication?): </label>
           <input 
               type="text" 
               className="form-control"
@@ -121,7 +113,7 @@ export default class CreateMedication extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Date: </label>
+          <label>Expiration Date: </label>
           <div>
             <DatePicker
               selected={this.state.date}
@@ -131,7 +123,7 @@ export default class CreateMedication extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+          <input type="submit" value="Submit" className="btn btn-primary" />
         </div>
       </form>
     </div>
