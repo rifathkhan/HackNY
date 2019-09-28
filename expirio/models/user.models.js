@@ -62,7 +62,9 @@ const userSchema = new Schema({
     },
     cellnumber: {
         type: String,
-        required: true
+        required: true,
+        minlength: 10,
+        maxlength: 10
     },
     items: [itemSchema]
 }, {
