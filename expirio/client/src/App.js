@@ -11,8 +11,6 @@ import UserLogin from "./components/user-login.component";
 function App() {
   return (
     <Router> 
-        <div className="container">
-         <br/>
 
           <Route path="/medcab" exact component={MedicationList} />
           <Route path="/edit/:id" exact component={EditMedication} />
@@ -20,7 +18,6 @@ function App() {
           <Route path="/signup" exact component={CreateNewUser} />
           <Route path="/login" exact component={UserLogin} />
         
-        </div>
     </Router>
   );
 }
