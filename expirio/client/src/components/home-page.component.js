@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import "../home.css"
-import logo from "../expirio.PNG"
+import "../home.css";
+import logo from "../img/expirio.PNG";
 
 export default class CreateUser extends Component {
   constructor(props) {
