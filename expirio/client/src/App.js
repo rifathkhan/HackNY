@@ -8,6 +8,7 @@ import AddMedication from "./components/add-medication.component";
 import CreateNewUser from "./components/user-signup.component";
 import UserLogin from "./components/user-login.component";
 import AboutUs from "./components/about-us.component";
+import HomePage from "./components/home-page.component";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" exact component={CreateNewUser} />
           <Route path="/login" exact component={UserLogin} />
           <Route path="/about" exact component={AboutUs} />
+          <Route path="/" exact component={HomePage} />
     </Router>
   );
 }
