@@ -40,21 +40,21 @@ export default class CreateUser extends Component {
 
   render() {
     return (
-          <div className="row no-gutter">
+          <div className="row no-gutter ">
               <div className="col-md-8 col-lg-6">
                 <div className="login d-flex align-items-center py-5">
                   <div className="container-fluid">
                   <div className="row">
                     <div className="col-md-9 col-lg-8 mx-auto">
-                    <img className="sign-Up-Logo align-items-center" src={logo} width="150px" height="220px"/>
-                      <h3 className="login-heading mb-4">Create an account!</h3>
+                    <img className="sign-Up-Logo align-items-center text-Label" src={logo} width="125px" height="180px" alt="Expirio Logo"/>
+                      <h3 className="login-heading mb-4 align-items-center text-Label">Create an account!</h3>
                       <form id="signupform">
                         <label htmlFor="inputName" className="text-center" >User Name</label>
                         <div className="form-label-group">
                           <input name="username" type="username" id="inputUsername" className="form-control" required autoFocus/>
                         </div>
 
-                        <label htmlFor="inputEmail">Email address</label>
+                        <label htmlFor="inputEmail"> Email address</label>
                         <div className="form-label-group">
                           <input name="email" type="email" id="inputEmail" className="form-control" required autoFocus/>
                         </div>
@@ -81,17 +81,17 @@ export default class CreateUser extends Component {
                         >
                           Register
                         </button>
-                        <a className="d-block text-center mt-2 small" href="/login">Already have an account?</a>
-
+                        <a className="d-block text-center mt-3 medium" href="/login">Already have an account?</a>
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="d-none d-md-flex col-md-4 col-lg-6">
+            <div className="d-none d-md-flex col-md-4 col-lg-6 ">
               <section>
-                
+                <p className="bordered-Heading">what is expirio?</p>
+                <p className="bordered-Context">Expirio reminds you for things that are about to expire!</p>
               </section>
             </div>
           </div>
