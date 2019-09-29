@@ -146,35 +146,6 @@
   }
 
 
-  .bordered-Heading {
-    display: block;
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 3px solid #fff;
-    position: absolute;
-    top: 10%; 
-    left: 12%;
-    transform: translate(0%, 0%);
-    padding: 3rem 6rem;
-    max-width: 100%;
-    min-width: 10%
-  }
-
-  .bordered-Context {
-    display: block;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    border: 3px solid #fff;
-    position: absolute;
-    top: 35%; 
-    left: 6%;
-    transform: translate(0%, 0%);
-    padding: 2rem 4rem;
-    max-width: 100%;
-    min-width: 10%
-  }
-
   
   /* Fallback for Edge
   -------------------------------------------------- */

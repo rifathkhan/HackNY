@@ -90,8 +90,7 @@ export default class CreateUser extends Component {
             </div>
             <div className="d-none d-md-flex col-md-4 col-lg-6 ">
               <section>
-                <p className="bordered-Heading">what is expirio?</p>
-                <p className="bordered-Context">Expirio reminds you for things that are about to expire!</p>
+                
               </section>
             </div>
           </div>

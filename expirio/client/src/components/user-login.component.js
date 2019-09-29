@@ -45,8 +45,10 @@ export default class CreateUser extends Component {
                   <div className="container">
                     <div className="row">
                       <div className="col-md-9 col-lg-8 mx-auto">
+                        
                         <img className="login-Logo" src={logo} width="150px" height="220px" alt="Expirio Logo"/>
-                        <h3 className="login-heading mb-4">Welcome back!</h3>
+                        
+                        <h3 className="login-heading mb-4 text-Label">Welcome back!</h3>
                         <form id="loginform">
                           <label htmlFor="inputEmail">User Name</label>
                           <div className="form-label-group">
@@ -71,11 +73,15 @@ export default class CreateUser extends Component {
                           </button>
                           
                           <div className="text-center">
-                            <a className="small" href="#">Forgot password?</a>
+                            <a className="d-block text-center mt-3 medium" href="#">Forgot password?</a>
                           </div>
 
                           <div className="text-center">
-                            <a className="small" href="/signup">Don't have an account?</a>
+                            <a className="d-block text-center mt-3 medium" href="/signup">Don't have an account?</a>
+                          </div>
+
+                          <div className="text-center">
+                            <a className="d-block text-center mt-3 medium" href="/about">About us</a>
                           </div>
                             
                         </form>
