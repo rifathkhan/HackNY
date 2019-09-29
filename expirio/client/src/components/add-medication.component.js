@@ -82,7 +82,8 @@ export default class CreateMedication extends Component {
     axios.post('http://localhost:5000/items/create', medication, {
       "headers" : {"authorization" : "bearer " + localStorage.getItem("token")}
     })
-    .then(res => console.log(res.data));
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err));
 
     window.location = '/medcab';
   }
