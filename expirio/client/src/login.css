@@ -53,9 +53,9 @@ section {
     border-radius: 2rem;
   }
 
-  .space {
-    margin-bottom: 20%;
-  }
+.login-Logo {
+  margin-left: 35%;
+}
   
   .form-label-group {
     position: relative;

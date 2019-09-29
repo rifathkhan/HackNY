@@ -45,7 +45,7 @@ export default class CreateUser extends Component {
                   <div className="container">
                     <div className="row">
                       <div className="col-md-9 col-lg-8 mx-auto">
-                        <img className="logo" src={logo} width="150px" height="220px"/>
+                        <img className="login-Logo" src={logo} width="150px" height="220px"/>
                         <h3 className="login-heading mb-4">Welcome back!</h3>
                         <form id="loginform">
                           <label htmlFor="inputEmail">User Name</label>
