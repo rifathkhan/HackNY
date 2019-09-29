@@ -7,14 +7,16 @@ export default class EditMedication extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    console.log(props.location.state.id);
+
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
 
     this.state = {
-      username: '',
+      name: '',
       description: '',
       duration: 0,
       date: new Date(),
@@ -23,10 +25,10 @@ export default class EditMedication extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/medication/'+this.props.match.params.id)
+    /*
+    axios.get('http://localhost:5000/items/update/'+this.props.id)
       .then(response => {
         this.setState({
-          username: response.data.username,
           description: response.data.description,
           duration: response.data.duration,
           date: new Date(response.data.date)
@@ -36,7 +38,7 @@ export default class EditMedication extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/users/')
+    axios.get('http://localhost:5000/items/update')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -47,12 +49,13 @@ export default class EditMedication extends Component {
       .catch((error) => {
         console.log(error);
       })
+      */
 
   }
 
-  onChangeUsername(e) {
+  onChangeName(e) {
     this.setState({
-      username: e.target.value
+      name: e.target.value
     })
   }
 
@@ -78,18 +81,21 @@ export default class EditMedication extends Component {
     e.preventDefault();
 
     const medication = {
-      username: this.state.username,
+      name: this.state.name,
       description: this.state.description,
       duration: this.state.duration,
-      date: this.state.date
+      expireDate: this.state.date
     }
 
     console.log(medication);
 
-    axios.post('http://localhost:5000/exercises/update/' + this.props.match.params.id, medication)
-      .then(res => console.log(res.data));
+    axios.patch('http://localhost:5000/items/update/' + this.props.location.state.id, medication, {
+      "headers" : {"authorization" : "bearer " + localStorage.getItem("token")}
+    })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
 
-    window.location = '/';
+    window.location = '/medcab';
   }
 
   render() {
@@ -97,22 +103,14 @@ export default class EditMedication extends Component {
     <div>
       <h3>Edit Medication Log</h3>
       <form onSubmit={this.onSubmit}>
-        <div className="form-group"> 
-          <label>Username: </label>
-          <select ref="userInput"
+        <div className="form-group">
+          <label>Name: </label>
+          <input  type="text"
               required
               className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option 
-                    key={user}
-                    value={user}>{user}
-                    </option>;
-                })
-              }
-          </select>
+              value={this.state.name}
+              onChange={this.onChangeName}
+              />
         </div>
         <div className="form-group"> 
           <label>Description: </label>

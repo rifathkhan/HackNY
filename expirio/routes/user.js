@@ -80,7 +80,7 @@ router.route('/signup').post((req, res) => {
 //     password: {Type: String},
 // }
 // @desc Logs in user and sends token
-router.route('/login').get((req, res) => {
+router.route('/login').post((req, res) => {
     
     // For simplicity sake we only assume username and password in res.body
     userInfo = {

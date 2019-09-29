@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from './navbar.component';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const Medication = props => (
   <tr>
-    <td>{props.medication.username}</td>
+    <td>{props.medication.name}</td>
     <td>{props.medication.description}</td>
     <td>{props.medication.duration}</td>
-    <td>{props.medication.date.substring(0,10)}</td>
+    <td>{new Date(props.medication.expireDate).toLocaleDateString()}</td>
     <td>
-      <Link to={"/edit/"+props.medication._id}>edit</Link> | <a href="#" onClick={() => { props.deleteMedication(props.medication._id) }}>delete</a>
+      <Link to={{pathname: "/edit/"+props.medication._id, state : {id: props.medication._id}}}>edit</Link> | <a href="#" onClick={() => { props.deleteMedication(props.medication._id) }}>delete</a>
     </td>
+    <td>{props.medication._id}</td>
   </tr>
 )
 
@@ -25,9 +28,11 @@ export default class MedicationList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/items/')
+    axios.get('http://localhost:5000/items/', {
+      "headers" : {"authorization" : "bearer " + localStorage.getItem("token")}
+    })
       .then(response => {
-        this.setState({ medication: response.data })
+        this.setState({ medication: response.data.items })
       })
       .catch((error) => {
         console.log(error);
@@ -35,7 +40,9 @@ export default class MedicationList extends Component {
   }
 
   deleteMedication(id) {
-    axios.delete('http://localhost:5000/items/'+id)
+    axios.delete('http://localhost:5000/items/delete/'+id, {
+      "headers" : {"authorization" : "bearer " + localStorage.getItem("token")}
+    })
       .then(response => { console.log(response.data)});
 
     this.setState({
@@ -43,7 +50,7 @@ export default class MedicationList extends Component {
     })
   }
 
-  exerciseList() {
+  medicationList() {
     return this.state.medication.map(currentmedication => {
       return <Medication medication={currentmedication} deleteMedication={this.deleteMedication} key={currentmedication._id}/>;
     })
@@ -57,15 +64,16 @@ export default class MedicationList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Username</th>
+              <th>Name</th>
               <th>Description</th>
               <th>Duration</th>
               <th>Expiration Date</th>
               <th>Actions</th>
+              <th>ID</th>
             </tr>
           </thead>
           <tbody>
-            { this.exerciseList() }
+            { this.medicationList() }
           </tbody>
         </table>
       </div>

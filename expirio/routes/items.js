@@ -127,7 +127,6 @@ router.route('/update/:id').patch(auth.verifyToken, (req, res) => {
             user.items = user.items.map(elem => {
                 if(req.params.id == elem._id){
                     elem.name = req.body.name;
-                    elem.type = req.body.type;
                     elem.expireDate = req.body.expireDate;
                     elem.description = req.body.description;
                     elem.duration = req.body.duration;

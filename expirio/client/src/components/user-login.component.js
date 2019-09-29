@@ -8,36 +8,33 @@ export default class CreateUser extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.state = {
-      username: '',
-      password: ''
-    }
-  }
-
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    })
   }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const user = {
-      username: this.state.username
+    const myForm = document.getElementById("loginform");
+    let formData = new FormData(myForm);
+    let user = {};
+    for (let key of formData.keys()){
+      user[key] = formData.get(key);
     }
 
-    console.log(user);
 
     axios.post('http://localhost:5000/user/login', user)
-      .then(res => console.log(res.data));
+      .then(res => {
+        if(res.status >= 400){
+          console.log(res.data);
+        } else {
+          localStorage.setItem("token", res.data.token);
+          console.log(localStorage.getItem("token"));
 
-    this.setState({
-      username: ''
-    })
+          window.location = '/medcab';
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -50,14 +47,14 @@ export default class CreateUser extends Component {
                       <div className="col-md-9 col-lg-8 mx-auto">
                         <img className="logo" src={logo} width="150px" height="220px"/>
                         <h3 className="login-heading mb-4">Welcome back!</h3>
-                        <form>
-                          <label htmlFor="inputEmail">Email address</label>
+                        <form id="loginform">
+                          <label htmlFor="inputEmail">User Name</label>
                           <div className="form-label-group">
-                            <input type="email" id="inputEmail" className="form-control" required autoFocus/>
+                            <input type="text" id="inputUsername" className="form-control" name="username" required autoFocus/>
                           </div>
                           <label htmlFor="inputPassword">Password</label>
                           <div className="form-label-group">
-                            <input type="password" id="inputPassword" className="form-control" required/> 
+                            <input type="password" id="inputPassword" className="form-control" name="password" required/> 
                           </div>
 
                           <div className="custom-control custom-checkbox mb-3">
@@ -65,7 +62,14 @@ export default class CreateUser extends Component {
                             <label className="custom-control-label" htmlFor="customCheck1">Remember password</label>
                           </div>
                           
-                          <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                          <button 
+                            className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" 
+                            type="submit"
+                            onClick = {e => this.onSubmit(e)}
+                          >
+                            Sign in
+                          </button>
+                          
                           <div className="text-center">
                             <a className="small" href="#">Forgot password?</a>
                           </div>

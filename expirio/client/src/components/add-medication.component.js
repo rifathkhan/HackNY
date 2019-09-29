@@ -23,7 +23,10 @@ export default class CreateMedication extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')                 // We could also use fetch to do this ...  
+    /*
+    axios.get('http://localhost:5000/users/', {
+      "headers" : {"authorization" : "bearer " + localStorage.getItem("token")}
+    })                 // We could also use fetch to do this ...  
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -35,7 +38,7 @@ export default class CreateMedication extends Component {
       .catch((error) => {
         console.log(error);
       })
-
+  */
   }
 
   onChangeMedication(e) {
@@ -66,16 +69,20 @@ export default class CreateMedication extends Component {
     e.preventDefault();
 
     const medication = {
-      medication: this.state.medication,
+      name: this.state.medication,
       description: this.state.description,
       duration: this.state.duration,
-      date: this.state.date
+      expireDate: this.state.date,
+      type: "medication"
     }
+
 
     console.log(medication);
 
-    axios.post('http://localhost:5000/exercises/add', medication)
-      .then(res => console.log(res.data));
+    axios.post('http://localhost:5000/items/create', medication, {
+      "headers" : {"authorization" : "bearer " + localStorage.getItem("token")}
+    })
+    .then(res => console.log(res.data));
 
     window.location = '/medcab';
   }
