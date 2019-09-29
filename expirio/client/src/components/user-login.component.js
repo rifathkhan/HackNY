@@ -84,7 +84,11 @@ export default class CreateUser extends Component {
                   </div>
                 </div>
               </div>
-              <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+              <div className="d-none d-md-flex col-md-4 col-lg-6">
+                <section>
+
+                </section>
+              </div>
             </div>
 
     )

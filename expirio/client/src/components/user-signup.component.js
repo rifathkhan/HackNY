@@ -43,10 +43,10 @@ export default class CreateUser extends Component {
           <div className="row no-gutter">
               <div className="col-md-8 col-lg-6">
                 <div className="login d-flex align-items-center py-5">
-                  <div className="container">
+                  <div className="container-fluid">
                   <div className="row">
                     <div className="col-md-9 col-lg-8 mx-auto">
-                    <img className="logo" src={logo} width="150px" height="220px"/>
+                    <img className="logo align-items-center" src={logo} width="150px" height="220px"/>
                       <h3 className="login-heading mb-4">Create an account!</h3>
                       <form id="signupform">
                         <label htmlFor="inputName" className="text-center" >User Name</label>
@@ -89,7 +89,11 @@ export default class CreateUser extends Component {
                 </div>
               </div>
             </div>
-            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div className="d-none d-md-flex col-md-4 col-lg-6">
+              <section>
+                
+              </section>
+            </div>
           </div>
     )
   }
