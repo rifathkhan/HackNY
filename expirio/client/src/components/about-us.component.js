@@ -19,7 +19,7 @@ export default class AboutUs extends Component {
         {/* Header */}
         <header className="bg-primary text-center py-5 mb-4">
           <div className="container">
-            <h1 className="font-weight-light text-white">About Us</h1>
+            <h1 className="font-weight-light text-white">The Team</h1>
           </div>
         </header>
         {/* Page Content */}
