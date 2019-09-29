@@ -7,38 +7,34 @@ export default class CreateUser extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.state = {
-      username: '',
-      password: '',
-      phonenumber: Number(''),
-      emailaddress: ''
-    }
   }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    })
-  }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const user = {
-      username: this.state.username
+    const myForm = document.getElementById("signupform");
+    let formData = new FormData(myForm);
+
+    let user = {};
+    for (let key of formData.keys()){
+      user[key] = formData.get(key);
     }
 
     console.log(user);
 
     axios.post('http://localhost:5000/user/signup', user)
-      .then(res => console.log(res.data));
-
-    this.setState({
-      username: ''
+    .then(res => {
+      if(res.status >= 400){
+        console.log(res.data);
+      } else {
+        localStorage.setItem("token", res.data.token);
+        window.location = '/login';
+      }
     })
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -52,7 +48,7 @@ export default class CreateUser extends Component {
                   <div className="row">
                     <div className="col-md-9 col-lg-8 mx-auto">
                       <h3 className="login-heading mb-4">Create an account!</h3>
-                      <form>
+                      <form id="signupform">
                         <label htmlFor="inputName" className="text-center" >User Name</label>
                         <div className="form-label-group">
                           <input name="username" type="username" id="inputUsername" className="form-control" required autoFocus/>
@@ -68,17 +64,23 @@ export default class CreateUser extends Component {
                           <input name="password" type="password" id="inputPassword" className="form-control" required/> 
                         </div>
 
-                        <label htmlFor="inputPassword">Confirm Password</label>
+                        <label htmlFor="confirmPassword">Confirm Password</label>
                         <div className="form-label-group"> 
-                          <input type="password" id="inputPassword" className="form-control" required/> 
+                          <input type="password" id="ConfirmPassword" className="form-control" required/> 
                         </div>
 
                         <label htmlFor="inputPhoneNumber">Phone number</label>
                         <div className="form-label-group">
-                          <input name="cellnumber" type="password" id="inputPassword" className="form-control" required/> 
+                          <input name="cellnumber" type="phoneNumber" id="inputPhoneNumber" className="form-control" required/> 
                         </div>
 
-                        <button className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Register</button>
+                        <button 
+                          className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" 
+                          type="submit"
+                          onClick = {e => this.onSubmit(e)}
+                        >
+                          Register
+                        </button>
                         <a className="d-block text-center mt-2 small" href="/login">Already have an account?</a>
 
                       </form>
