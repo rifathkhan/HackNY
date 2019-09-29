@@ -3,7 +3,7 @@
     --input-padding-y: 0.75rem;
   }
 
-  html, body {margin: 0; height: 100%; overflow: hidden}
+  html, body {margin: 0; height: 100%;}
   img {margin-bottom: 50px}
   
   .login,
