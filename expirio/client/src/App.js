@@ -11,13 +11,11 @@ import UserLogin from "./components/user-login.component";
 function App() {
   return (
     <Router> 
-
           <Route path="/medcab" exact component={MedicationList} />
           <Route path="/edit/:id" exact component={EditMedication} />
           <Route path="/add" exact component={AddMedication} />
           <Route path="/signup" exact component={CreateNewUser} />
           <Route path="/login" exact component={UserLogin} />
-        
     </Router>
   );
 }
