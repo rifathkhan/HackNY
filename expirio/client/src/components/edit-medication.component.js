@@ -141,7 +141,7 @@ export default class EditMedication extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
+          <input type="submit" value="Edit Medication" className="btn btn-primary" />
         </div>
       </form>
     </div>
