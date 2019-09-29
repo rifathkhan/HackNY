@@ -6,6 +6,12 @@
   html, body {margin: 0; height: 100%;}
   img {margin-bottom: 50px}
 
+  ::-webkit-scrollbar { 
+    display: none;            /*for Chrome*/
+  }
+
+
+
   .login,
   .image {
     min-height: 100vh;
