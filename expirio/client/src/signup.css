@@ -19,7 +19,7 @@
     width: auto;
     height: auto;
     color: #fff;
-    background: linear-gradient(-45deg,  #FF944D, #EE7752, #E73C7E, #23A6D5, #23D5AB, #00B359);
+    background: linear-gradient(-45deg,  #FF944D, #EE7752, #E73C7E, #23A6D5);
     background-size: auto;
     position: relative;
     animation: animate 10s ease-in-out infinite;
@@ -54,7 +54,7 @@
     }
 
   .bg-image {
-    background: linear-gradient(301deg, #d53120, #b309f5, #5f09f5, #09aff5, #b9f509);
+    background: linear-gradient(301deg, #d53120, #b309f5, #5f09f5, #09aff5);
     background-size: 100% 100%;
 
     -webkit-animation: AnimationName 24s ease infinite;

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import "../about.css"
 
-import Oren from "../Oren_Senpai.jpg";
-import Rifat from "../Rifat.PNG";
-import Rehman from "../Rehman.PNG";
+import Oren from "../img/Oren_Senpai.jpg";
+import Rifat from "../img/Rifat.PNG";
+import Rehman from "../img/Rehman.PNG";
 
 export default class AboutUs extends Component {
   constructor(props) {
     super(props);
 
   }
-
-
 
   render() {
     return (
