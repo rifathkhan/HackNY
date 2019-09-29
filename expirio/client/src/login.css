@@ -3,11 +3,18 @@
     --input-padding-y: 0.75rem;
   }
   
+  html, body {margin: 0; height: 100%; overflow: hidden}
+  img {margin-bottom: 50px}
+
   .login,
   .image {
     min-height: 100vh;
   }
   
+  #huntr-react-container{
+    display:none;
+    }
+
   .bg-image {
     background-image: url('https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?ixlib=rb-1.2.1&dpr=2&auto=format&fit=crop&w=416&h=312&q=60');
     background-size: cover;
@@ -25,9 +32,9 @@
     border-radius: 2rem;
   }
 
-.space {
-  margin-bottom: 20%;
-}
+  .space {
+    margin-bottom: 20%;
+  }
   
   .form-label-group {
     position: relative;

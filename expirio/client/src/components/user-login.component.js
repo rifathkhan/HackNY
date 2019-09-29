@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import "../login.css"
+import logo from "../expirio.PNG"
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -39,12 +40,12 @@ export default class CreateUser extends Component {
   render() {
     return (
           <div className="row no-gutter">
-            <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
               <div className="col-md-8 col-lg-6">
                 <div className="login d-flex align-items-center py-5">
                   <div className="container">
                     <div className="row">
                       <div className="col-md-9 col-lg-8 mx-auto">
+                        <img className="logo" src={logo} width="150px" height="220px"/>
                         <h3 className="login-heading mb-4">Welcome back!</h3>
                         <form id="loginform">
                           <label htmlFor="inputEmail">User Name</label>
@@ -83,6 +84,7 @@ export default class CreateUser extends Component {
                   </div>
                 </div>
               </div>
+              <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
             </div>
 
     )
