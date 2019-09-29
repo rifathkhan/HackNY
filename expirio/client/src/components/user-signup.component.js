@@ -32,7 +32,7 @@ export default class CreateUser extends Component {
         console.log(res.data);
       } else {
         localStorage.setItem("token", res.data.token);
-        window.location = '/login';
+        window.location = '/';
       }
     })
     .catch(err => console.log(err));
