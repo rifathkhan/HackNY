@@ -30,8 +30,8 @@ export default class AboutUs extends Component {
               <div className="card border-0 shadow">
                 <img src={Rifat} className="card-img-top" alt="..." />
                 <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Team Member</h5>
-                  <div className="card-text text-black-50">Web Developer</div>
+                  <h5 className="card-title mb-0">Rifat</h5>
+                  <div className="card-text text-black-50">Designed the frontend with React and integrated Twilio API</div>
                 </div>
               </div>
             </div>
@@ -40,8 +40,8 @@ export default class AboutUs extends Component {
               <div className="card border-0 shadow">
                 <img src={Oren} className="card-img-top" alt="..." />
                 <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Team Member</h5>
-                  <div className="card-text text-black-50">Web Developer</div>
+                  <h5 className="card-title mb-0">Oren</h5>
+                  <div className="card-text text-black-50">Built the backend and databases using MERN Stack</div>
                 </div>
               </div>
             </div>
@@ -50,8 +50,8 @@ export default class AboutUs extends Component {
               <div className="card border-0 shadow">
                 <img src={Rehman} className="card-img-top" alt="..." />
                 <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Team Member</h5>
-                  <div className="card-text text-black-50">Web Developer</div>
+                  <h5 className="card-title mb-0">Rehman</h5>
+                  <div className="card-text text-black-50">Designed the frontend with React and built routes using Express</div>
                 </div>
               </div>
             </div>
