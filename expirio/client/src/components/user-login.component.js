@@ -40,6 +40,7 @@ export default class CreateUser extends Component {
   render() {
     return (
           <div className="row no-gutter">
+              
               <div className="col-md-8 col-lg-6">
                 <div className="login d-flex align-items-center py-5">
                   <div className="container">
@@ -95,7 +96,8 @@ export default class CreateUser extends Component {
                 <section>
 
                 </section>
-              </div>
+              </div>        
+
             </div>
 
     )
