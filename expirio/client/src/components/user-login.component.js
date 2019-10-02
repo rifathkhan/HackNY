@@ -23,7 +23,7 @@ export default class CreateUser extends Component {
     }
 
 
-    axios.post('http://localhost:5000/user/login', user)
+    axios.post('http://localhost:5000/user/', user)
       .then(res => {
         if(res.status >= 400){
           console.log(res.data);
